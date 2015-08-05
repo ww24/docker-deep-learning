@@ -33,6 +33,11 @@ RUN gpasswd -a caffe sudo
 # set env
 ENV PATH /usr/local/cuda-7.0/bin:$PATH
 ENV LD_LIBRARY_PATH /usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
+ENV GOPATH /go
+
+# set workdir
+VOLUME ["/go"]
+WORKDIR /go
 
 # install caffe
 RUN cd /home/caffe/; git clone https://github.com/BVLC/caffe.git
