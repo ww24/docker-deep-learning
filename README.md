@@ -14,7 +14,7 @@ Environment
 * Caffe
 * cuDNN (option)
 * Go
-* curl, wget, git, openssh-server, etc...
+* curl, wget, git, nano, vim, openssh-server, etc...
 
 Download cuDNN
 --------------

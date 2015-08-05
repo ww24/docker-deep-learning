@@ -9,8 +9,7 @@ RUN apt-get upgrade -y
 EXPOSE 22
 
 # install dependent packages
-RUN apt-get install -y openssh-server curl wget git build-essential
-#RUN apt-get install -y libopenblas-dev libboost1.55-dev libopencv-dev libprotobuf-dev libhdf5-dev libleveldb-dev libsnappy-dev liblmdb-dev
+RUN apt-get install -y openssh-server curl wget git vim-nox nano build-essential
 RUN apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-serial-dev libatlas-base-dev python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler
 
 # setup go ppa
