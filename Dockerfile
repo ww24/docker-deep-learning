@@ -33,6 +33,7 @@ RUN gpasswd -a caffe sudo
 ENV PATH /usr/local/cuda-7.0/bin:$PATH
 ENV LD_LIBRARY_PATH /usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
 ENV GOPATH /go
+ENV PATH=$PATH:$GOPATH/bin
 
 # set workdir
 VOLUME ["/go"]
