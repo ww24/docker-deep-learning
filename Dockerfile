@@ -35,18 +35,20 @@ ENV LD_LIBRARY_PATH /usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
 ENV GOPATH /go
 ENV PATH=$PATH:$GOPATH/bin
 
-# set workdir
-VOLUME ["/go"]
-WORKDIR /go
-
 # install caffe
-RUN cd /home/caffe/; git clone https://github.com/BVLC/caffe.git
-RUN cd /home/caffe/caffe; cp Makefile.config.example Makefile.config
-#RUN cd /home/caffe/caffe; make all
+WORKDIR /home/caffe
+RUN git clone https://github.com/BVLC/caffe.git
+WORKDIR /home/caffe/caffe
+RUN cp Makefile.config.example Makefile.config
+#RUN make all
 
 # change owner and group
 RUN chown -R caffe /home/caffe
 RUN chgrp -R caffe /home/caffe
+
+# set workdir
+VOLUME ["/go"]
+WORKDIR /go
 
 # set docker init script
 ADD init.sh /usr/local/bin/init.sh
