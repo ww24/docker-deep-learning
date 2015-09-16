@@ -17,12 +17,13 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 742A38EE
 RUN echo 'deb http://ppa.launchpad.net/evarlast/golang1.4/ubuntu trusty main' > /etc/apt/sources.list.d/golang.list
 
 # setup cuda repository
-RUN wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.0-28_amd64.deb
-RUN dpkg -i cuda-repo-ubuntu1404_7.0-28_amd64.deb; rm -f cuda-repo-ubuntu1404_7.0-28_amd64.deb
+RUN wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
+RUN sudo dpkg -i cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
+RUN rm -f cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
 RUN apt-get update
 
 RUN apt-get install -y golang
-#RUN apt-get install -y cuda
+RUN apt-get install -y cuda
 
 # add user
 RUN useradd -m caffe
