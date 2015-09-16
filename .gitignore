@@ -1,5 +1,8 @@
 .*
 !.gitignore
+
+go/*
+
 !.gitkeep
 
 Thumbs.db
