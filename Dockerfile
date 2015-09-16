@@ -13,15 +13,15 @@ RUN apt-get install -y openssh-server curl wget git vim-nox nano build-essential
 RUN apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-serial-dev libatlas-base-dev python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler
 
 # golang 1.5
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 742A38EE
-echo 'deb http://ppa.launchpad.net/evarlast/golang1.5/ubuntu trusty main' | sudo tee /etc/apt/sources.list.d/golang.list
+# http://floaternet.com/golang/godeb
+RUN wget -O godeb.tar.gz https://godeb.s3.amazonaws.com/godeb-amd64.tar.gz
+RUN tar xzvf godeb.tar.gz
+RUN ./godeb install 1.5
 
 # setup cuda repository
 RUN wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.0-28_amd64.deb
 RUN dpkg -i cuda-repo-ubuntu1404_7.0-28_amd64.deb; rm -f cuda-repo-ubuntu1404_7.0-28_amd64.deb
 RUN apt-get update
-
-RUN apt-get install -y golang
 #RUN apt-get install -y cuda
 
 # add user
@@ -33,7 +33,7 @@ RUN gpasswd -a caffe sudo
 ENV PATH /usr/local/cuda-7.0/bin:$PATH
 ENV LD_LIBRARY_PATH /usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
 ENV GOPATH /go
-ENV PATH=$PATH:$GOPATH/bin
+ENV PATH=$PATH:$GOPATH/bin:/usr/local/cuda/bin
 
 # install caffe
 WORKDIR /home/caffe
