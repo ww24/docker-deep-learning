@@ -18,12 +18,16 @@ RUN wget -O godeb.tar.gz https://godeb.s3.amazonaws.com/godeb-amd64.tar.gz
 RUN tar xzvf godeb.tar.gz
 RUN ./godeb install 1.5
 
-# setup cuda repository
-RUN wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
-RUN sudo dpkg -i cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
-RUN rm -f cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
-RUN apt-get update
-RUN apt-get install -y cuda
+# setup cuda repository (skip)
+#RUN wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
+#RUN sudo dpkg -i cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
+#RUN rm -f cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
+#RUN apt-get update
+#RUN apt-get install -y cuda
+
+# cudnn (skip)
+#RUN cp lib64/* /usr/local/cuda-7.5/lib64
+#RUN cp include/* /usr/local/cuda-7.5/include
 
 # add user
 RUN useradd -m caffe
@@ -32,7 +36,7 @@ RUN gpasswd -a caffe sudo
 
 # set env
 ENV PATH /usr/local/cuda-7.0/bin:$PATH
-ENV LD_LIBRARY_PATH /usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH /usr/local/cuda/lib64:$LD_LIBRARY_PATH
 ENV GOPATH /go
 ENV PATH=$PATH:$GOPATH/bin:/usr/local/cuda/bin
 
