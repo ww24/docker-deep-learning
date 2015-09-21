@@ -35,7 +35,7 @@ RUN echo caffe:caffe | chpasswd
 RUN gpasswd -a caffe sudo
 
 # set env
-ENV PATH /usr/local/cuda-7.0/bin:$PATH
+ENV PATH /usr/local/cuda/bin:$PATH
 ENV LD_LIBRARY_PATH /usr/local/cuda/lib64:$LD_LIBRARY_PATH
 ENV GOPATH /go
 ENV PATH=$PATH:$GOPATH/bin:/usr/local/cuda/bin
