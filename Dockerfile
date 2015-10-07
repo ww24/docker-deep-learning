@@ -45,7 +45,7 @@ WORKDIR /home/caffe
 RUN git clone https://github.com/BVLC/caffe.git
 WORKDIR /home/caffe/caffe
 RUN cp Makefile.config.example Makefile.config
-#RUN make all
+RUN make all
 
 # change owner and group
 RUN chown -R caffe /home/caffe
