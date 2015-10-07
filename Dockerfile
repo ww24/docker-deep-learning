@@ -23,7 +23,7 @@ RUN wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_instal
 RUN dpkg -i cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
 RUN rm -f cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
 RUN apt-get update
-RUN apt-get install -y cuda
+#RUN apt-get install -y cuda
 
 # cudnn (skip)
 #RUN cp lib64/* /usr/local/cuda-7.5/lib64
@@ -45,7 +45,7 @@ WORKDIR /home/caffe
 RUN git clone https://github.com/BVLC/caffe.git
 WORKDIR /home/caffe/caffe
 RUN cp Makefile.config.example Makefile.config
-RUN make all
+#RUN make all
 
 # change owner and group
 RUN chown -R caffe /home/caffe
