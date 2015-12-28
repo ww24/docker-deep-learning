@@ -27,7 +27,7 @@ ENV PYTHONPATH=/root/caffe/python:$PYTHONPATH
 
 # install caffe
 WORKDIR /root
-RUN git clone -depth 1000 https://github.com/BVLC/caffe.git
+RUN git clone --depth 1000 https://github.com/BVLC/caffe.git
 WORKDIR /root/caffe
 RUN cp Makefile.config.example Makefile.config
 RUN make all
