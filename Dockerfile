@@ -1,4 +1,4 @@
-FROM nvidia/cuda:7.0-cudnn2-runtime
+FROM nvidia/cuda:7.0-cudnn2-devel
 MAINTAINER Takenori Nakagawa
 
 # upgrade packages
@@ -19,18 +19,27 @@ RUN tar xzvf godeb.tar.gz
 RUN ./godeb install 1.5
 
 # set env
-ENV PATH /usr/local/cuda/bin:$PATH
 ENV LD_LIBRARY_PATH /usr/local/cuda/lib64:$LD_LIBRARY_PATH
 ENV GOPATH /go
 ENV PATH=$PATH:$GOPATH/bin:/usr/local/cuda/bin:/root/caffe/build/tools
 ENV PYTHONPATH=/root/caffe/python:$PYTHONPATH
 
-# install caffe
 WORKDIR /root
+
+# install caffe
 RUN git clone --depth 1000 https://github.com/BVLC/caffe.git
 WORKDIR /root/caffe
 RUN cp Makefile.config.example Makefile.config
 RUN make all
+WORKDIR /root
+
+# install tensorflow
+RUN git clone --depth 1000 https://github.com/tensorflow/tensorflow.git
+RUN pip install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.6.0-cp27-none-linux_x86_64.whl
+
+# install chainer
+RUN pip install --upgrade setuptools
+RUN pip install chainer
 
 # install usual packages and modules
 RUN apt-get install -y imagemagick python-pip python-numpy gfortran
