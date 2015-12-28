@@ -1,1 +1,1 @@
-docker exec -it cfc /bin/bash
+docker exec -it deep /bin/bash

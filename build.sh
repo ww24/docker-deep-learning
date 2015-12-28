@@ -1,1 +1,1 @@
-docker build -t caffe-cuda .
+docker build -t deep-learning .
