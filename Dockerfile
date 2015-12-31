@@ -1,33 +1,28 @@
 FROM nvidia/cuda:7.0-cudnn2-devel
 MAINTAINER Takenori Nakagawa
 
-# upgrade packages
-RUN apt-get update
-RUN apt-get upgrade -y
-
 # expose portes
 EXPOSE 22
 EXPOSE 6006
+
+# set volume and workdir
+VOLUME ["/root/data"]
+WORKDIR /root
+
+# upgrade packages
+RUN apt-get update
+RUN apt-get upgrade -y
 
 # install dependent packages
 RUN apt-get install -y curl wget git vim-nox nano build-essential
 RUN apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-dev libatlas-base-dev python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler
 
-# golang 1.5
-# http://floaternet.com/golang/godeb
-RUN wget -O godeb.tar.gz https://godeb.s3.amazonaws.com/godeb-amd64.tar.gz
-RUN tar xzvf godeb.tar.gz
-RUN ./godeb install 1.5
-
 # set env
-ENV GOPATH /go
 ENV CPATH=/usr/local/cuda/include:$CPATH
-ENV LIBRARY_PATH=/usr/local/cuda/lib64:$LIBRARY_PATH
-ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+ENV LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/lib64/stubs:$LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/lib64/stubs:$LD_LIBRARY_PATH
 ENV PATH=$GOPATH/bin:/usr/local/cuda/bin:/root/caffe/build/tools:$PATH
 ENV PYTHONPATH=/root/caffe/python:$PYTHONPATH
-
-WORKDIR /root
 
 # install caffe
 RUN git clone --depth 1000 https://github.com/BVLC/caffe.git
@@ -51,10 +46,6 @@ RUN git clone --depth 1000 https://github.com/pfnet/chainer.git
 RUN pip install --upgrade setuptools
 WORKDIR /root/chainer
 RUN python setup.py install
-WORKDIR /root
-
-# set workdir
-VOLUME ["/go"]
 WORKDIR /root
 
 # set docker init script

@@ -1,5 +1,5 @@
-Docker caffe
-============
+Docker Deep Learning
+====================
 
 卒研環境
 
@@ -17,10 +17,6 @@ Environment
 * Chainer
 * Go
 * curl, wget, git, nano, vim, openssh-server, etc...
-
-Download cuDNN
---------------
-[NVIDIA cuDNN – GPU Accelerated Deep Learning](https://developer.nvidia.com/cudnn)
 
 Get started
 -----------
