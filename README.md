@@ -27,5 +27,5 @@ Get started
 [NVIDIA Docker wrapper](https://github.com/NVIDIA/nvidia-docker#nvidia-docker-wrapper)
 
 ```
-GPU=0 ./nvidia-docker run -itd -v $(pwd)/go:/go -p 2222:22 --name deep deep-learning /bin/bash
+GPU=0 ./nvidia-docker run -itd -v $(pwd)/go:/go -p 2222:22 -p 6006:6006 --name deep deep-learning /bin/bash
 ```

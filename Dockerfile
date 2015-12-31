@@ -7,10 +7,11 @@ RUN apt-get upgrade -y
 
 # expose portes
 EXPOSE 22
+EXPOSE 6006
 
 # install dependent packages
 RUN apt-get install -y curl wget git vim-nox nano build-essential
-RUN apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-serial-dev libatlas-base-dev python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler
+RUN apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-dev libatlas-base-dev python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler
 
 # golang 1.5
 # http://floaternet.com/golang/godeb
@@ -19,9 +20,11 @@ RUN tar xzvf godeb.tar.gz
 RUN ./godeb install 1.5
 
 # set env
-ENV LD_LIBRARY_PATH /usr/local/cuda/lib64:$LD_LIBRARY_PATH
 ENV GOPATH /go
-ENV PATH=$PATH:$GOPATH/bin:/usr/local/cuda/bin:/root/caffe/build/tools
+ENV CPATH=/usr/local/cuda/include:$CPATH
+ENV LIBRARY_PATH=/usr/local/cuda/lib64:$LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+ENV PATH=$GOPATH/bin:/usr/local/cuda/bin:/root/caffe/build/tools:$PATH
 ENV PYTHONPATH=/root/caffe/python:$PYTHONPATH
 
 WORKDIR /root
@@ -44,8 +47,11 @@ RUN git clone --depth 1000 https://github.com/tensorflow/tensorflow.git
 RUN pip install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.6.0-cp27-none-linux_x86_64.whl
 
 # install chainer
+RUN git clone --depth 1000 https://github.com/pfnet/chainer.git
 RUN pip install --upgrade setuptools
-RUN pip install chainer
+WORKDIR /root/chainer
+RUN python setup.py install
+WORKDIR /root
 
 # set workdir
 VOLUME ["/go"]
