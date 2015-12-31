@@ -33,6 +33,12 @@ RUN cp Makefile.config.example Makefile.config
 RUN make all
 WORKDIR /root
 
+# install usual packages and modules
+RUN apt-get install -y imagemagick python-pip python-numpy gfortran
+RUN pip install --upgrade pip
+RUN pip install scipy pydot
+RUN pip install -r /root/caffe/python/requirements.txt
+
 # install tensorflow
 RUN git clone --depth 1000 https://github.com/tensorflow/tensorflow.git
 RUN pip install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.6.0-cp27-none-linux_x86_64.whl
@@ -40,12 +46,6 @@ RUN pip install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/te
 # install chainer
 RUN pip install --upgrade setuptools
 RUN pip install chainer
-
-# install usual packages and modules
-RUN apt-get install -y imagemagick python-pip python-numpy gfortran
-RUN pip install --upgrade pip
-RUN pip install scipy pydot
-RUN pip install -r /root/caffe/python/requirements.txt
 
 # set workdir
 VOLUME ["/go"]
