@@ -19,8 +19,14 @@ Environment
 
 Get started
 -----------
-[NVIDIA Docker wrapper](https://github.com/NVIDIA/nvidia-docker#nvidia-docker-wrapper)
+Pull from [Docker Hub](https://hub.docker.com/r/ww24/deep-learning/)
 
 ```
-GPU=0 ./nvidia-docker run -itd -v $(pwd)/data:/root/data -p 2222:22 -p 6006:6006 --name deep deep-learning /bin/bash
+docker pull ww24/deep-learning
+```
+
+Use [NVIDIA Docker wrapper](https://github.com/NVIDIA/nvidia-docker#nvidia-docker-wrapper)
+
+```
+GPU=0 ./nvidia-docker run -itd -v $(pwd)/data:/root/data -p 2222:22 -p 6006:6006 --name deep ww24/deep-learning /bin/bash
 ```

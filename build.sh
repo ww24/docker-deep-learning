@@ -1,1 +1,1 @@
-docker build -t deep-learning .
+docker build -t ww24/deep-learning .
