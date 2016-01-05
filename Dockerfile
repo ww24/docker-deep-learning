@@ -32,7 +32,7 @@ RUN make all
 WORKDIR /root
 
 # install usual packages and modules
-RUN apt-get install -y imagemagick python-pip python-numpy gfortran
+RUN apt-get install -y imagemagick python-pip python-numpy python-opencv gfortran
 RUN pip install --upgrade pip
 RUN pip install scipy pydot
 RUN pip install -r /root/caffe/python/requirements.txt
