@@ -10,7 +10,7 @@ Requirements
 
 Environment
 -----------
-* Essential environment (python, curl, wget, git, nano, vim, openssh-server, etc...)
+* Essential environment (python, curl, wget, git, nano, vim, etc...)
 * CUDA
 * cuDNN
 * Caffe
@@ -28,5 +28,5 @@ docker pull ww24/deep-learning
 Use [NVIDIA Docker wrapper](https://github.com/NVIDIA/nvidia-docker#nvidia-docker-wrapper)
 
 ```
-GPU=0 ./nvidia-docker run -itd -v $(pwd)/data:/root/data -p 2222:22 -p 6006:6006 --name deep ww24/deep-learning /bin/bash
+GPU=0 ./nvidia-docker run -itd -v $(pwd)/data:/root/data -p 6006:6006 --name deep ww24/deep-learning
 ```

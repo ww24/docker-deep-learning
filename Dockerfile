@@ -2,7 +2,6 @@ FROM nvidia/cuda:7.0-cudnn2-devel
 MAINTAINER Takenori Nakagawa
 
 # expose portes
-EXPOSE 22
 EXPOSE 6006
 
 # set volume and workdir
