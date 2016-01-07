@@ -1,7 +1,9 @@
 Docker Deep Learning
 ====================
 
-卒研環境
+Caffe, Chainer, TensorFlow の環境が数分で整います。
+
+Docker host が NVIDIA GPU を積んでいれば、 CUDA と cuDNN も利用可能です。
 
 Requirements
 ------------
@@ -14,8 +16,8 @@ Environment
 * CUDA
 * cuDNN
 * Caffe
-* Tensorflow
 * Chainer
+* TensorFlow
 
 Get started
 -----------
