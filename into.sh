@@ -1,1 +1,1 @@
-docker exec -it deep /bin/bash
+docker exec -it deep bash
